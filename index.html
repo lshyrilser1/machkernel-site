@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mach kernel</title>
+<meta name="description" content="A short reference on the Mach kernel: what it is, how it works, where it came from and where it runs today.">
+<link rel="canonical" href="https://machkernel.org/">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html" aria-current="page">Home</a><a href="concepts.html">Concepts</a><a href="history.html">History</a><a href="implementations.html">Implementations</a><a href="reading.html">Reading</a></nav>
+</header>
+<main id="main">
+<h1>The Mach kernel</h1>
+<p>Mach is an operating system kernel that began at Carnegie Mellon University in 1985. It rests on a simple claim: a kernel needs only a few things. It needs a way to run code (tasks and threads), a way to manage memory, and a way for programs to send each other messages. Everything else, such as file systems and device drivers, can run as ordinary programs outside the kernel.</p>
+<p>The CMU project ended in 1994, but the kernel kept going. Mach is the base of XNU, the kernel inside Apple's macOS and iOS, and it is the default microkernel of the GNU Hurd. Its virtual memory design was adopted into 4.4BSD and is still in FreeBSD.</p>
+<p>This site is a short reference for people who want to know what Mach is and where to read more. It does not try to be complete.</p>
+<h2>Pages</h2>
+<dl>
+<dt><a href="concepts.html">Concepts</a></dt>
+<dd>Tasks, threads, ports, messages and virtual memory, in plain terms.</dd>
+<dt><a href="history.html">History</a></dt>
+<dd>From Rochester in the 1970s to the devices that run Mach today.</dd>
+<dt><a href="implementations.html">Implementations</a></dt>
+<dd>The kernels descended from Mach, and which ones are still alive.</dd>
+<dt><a href="reading.html">Reading</a></dt>
+<dd>The original papers, the CMU archive and some later criticism.</dd>
+</dl>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

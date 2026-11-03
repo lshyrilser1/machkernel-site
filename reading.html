@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading - Mach kernel</title>
+<meta name="description" content="Papers, archives and books about the Mach kernel.">
+<link rel="canonical" href="https://machkernel.org/reading.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="concepts.html">Concepts</a><a href="history.html">History</a><a href="implementations.html">Implementations</a><a href="reading.html" aria-current="page">Reading</a></nav>
+</header>
+<main id="main">
+<h1>Reading</h1>
+<h2>Where it started</h2>
+<ul>
+<li>Accetta, Baron, Bolosky, Golub, Rashid, Tevanian, Young. <a href="https://cseweb.ucsd.edu/classes/fa08/cse221/papers/accetta86.pdf">Mach: A New Kernel Foundation for UNIX Development</a>. USENIX Summer 1986. The best single introduction.</li>
+<li>Rashid and Robertson. <a href="https://dl.acm.org/doi/10.1145/800216.806593">Accent: A Communication Oriented Network Operating System Kernel</a>. SOSP 1981. The kernel Mach grew out of.</li>
+<li>Draves, Jones, Thompson. <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/mig.html">MIG: The MACH Interface Generator</a>. 1989.</li>
+</ul>
+<h2>Mach 3.0 and servers</h2>
+<ul>
+<li>Malan, Rashid, Golub, Baron. <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/dospaper.html">DOS as a Mach 3.0 Application</a>. USENIX Mach Symposium, 1991.</li>
+<li>Draves, Bershad, Rashid, Dean. <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/threadmgnt.html">Using Continuations to Implement Thread Management and Communication in Operating Systems</a>. SOSP 1991.</li>
+<li>Ford and Lepreau. <a href="https://www.usenix.org/legacy/publications/library/proceedings/sf94/full_papers/ford.pdf">Evolving Mach 3.0 to a Migrating Thread Model</a>. USENIX Winter 1994.</li>
+</ul>
+<h2>Criticism</h2>
+<ul>
+<li>Liedtke. <a href="https://rcs.uwaterloo.ca/papers/l4.pdf">Improving IPC by Kernel Design</a>. SOSP 1993. Argues that Mach's message passing was far slower than it needed to be. It led to the L4 family of kernels.</li>
+</ul>
+<h2>Archives and books</h2>
+<ul>
+<li><a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/publications.html">The CMU Mach publication archive</a>, including the Mach Kernel Interface Manual.</li>
+<li>Silberschatz, Galvin and Gagne, <a href="https://newport.eecs.uci.edu/~doemer/eee_uci_edu/07w/18425/resources/appb.pdf">Operating System Concepts, appendix on the Mach system</a>.</li>
+<li><a href="https://www-old.cs.utah.edu/flux/mach4/html/Mach4-proj.html">The Mach 4 project</a> at the University of Utah.</li>
+</ul>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

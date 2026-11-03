@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concepts - Mach kernel</title>
+<meta name="description" content="The main ideas in Mach: tasks, threads, ports, messages and virtual memory.">
+<link rel="canonical" href="https://machkernel.org/concepts.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="concepts.html" aria-current="page">Concepts</a><a href="history.html">History</a><a href="implementations.html">Implementations</a><a href="reading.html">Reading</a></nav>
+</header>
+<main id="main">
+<h1>Concepts</h1>
+<p>The 1986 USENIX paper that introduced Mach describes four basic abstractions: tasks, threads, ports and messages. Memory management is built around them. This page covers each in a few sentences.</p>
+<h2>Tasks and threads</h2>
+<p>A <em>task</em> is a container for resources. It has an address space and a set of port rights, and it does not run anything by itself. A <em>thread</em> is the unit of execution. It runs inside a task, and a task can have many threads. This is different from a UNIX process, which combines both ideas in one object.</p>
+<h2>Ports and port rights</h2>
+<p>A <em>port</em> is a message queue that the kernel owns and protects. Programs never touch the queue directly. They hold <em>port rights</em>, which are permissions to use a port. The main rights are:</p>
+<ul>
+<li><b>receive</b>, which lets the holder take messages off the queue. Only one task holds it at a time.</li>
+<li><b>send</b>, which lets the holder put messages on the queue. Any number of tasks can hold it.</li>
+<li><b>send-once</b>, which allows a single send and is used for replies.</li>
+</ul>
+<p>A task can reach only the ports it has been given. Because of this, a port right works as a capability: what a program can do depends on what it holds, not on who it is.</p>
+<h2>Messages</h2>
+<p>Threads communicate by sending messages to ports. A message can carry plain data, port rights, and large regions of memory. Memory is sent without copying it up front: the receiver gets a copy-on-write mapping, and pages are copied only if one side writes to them.</p>
+<p>Writing the code for sending and receiving by hand is tedious, so Mach came with MIG, the Mach Interface Generator. It reads an interface definition and produces the stubs that turn a procedure call into a message and back.</p>
+<h2>Virtual memory</h2>
+<p>Each task has its own address space, made of regions backed by <em>memory objects</em>. Mach allows a memory object to be managed by a user-space program called an external pager, which supplies pages when the kernel needs them. Copy-on-write is used throughout, including for the memory that tasks inherit when they are created.</p>
+<h2>Servers and personalities</h2>
+<p>In Mach 2.5 the BSD code lived inside the kernel. Mach 3.0 moved it out into user-space servers, which is what makes it a microkernel in the strict sense. A program talks to a server by sending messages, and several operating system interfaces can share one kernel. Early demonstrations ran BSD, DOS and Linux this way. Apple's XNU did not follow this path and keeps BSD inside the kernel.</p>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

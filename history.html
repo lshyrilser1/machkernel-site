@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>History - Mach kernel</title>
+<meta name="description" content="A short timeline of Mach, from Rochester in the 1970s to Apple and the GNU Hurd.">
+<link rel="canonical" href="https://machkernel.org/history.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="concepts.html">Concepts</a><a href="history.html" aria-current="page">History</a><a href="implementations.html">Implementations</a><a href="reading.html">Reading</a></nav>
+</header>
+<main id="main">
+<h1>History</h1>
+<p>A short timeline. Each line links to a source. For a longer account with more of the people involved, see <a href="https://kyberos.org/history.html">the history page on kyberos.org</a>.</p>
+<div class="scroll"><table>
+<tr><th>When</th><th>What happened</th></tr>
+<tr><td class="when">1975 to 1979</td><td>At the University of Rochester, RIG (Rochester's Intelligent Gateway) and its Aleph kernel organize an operating system around message-passing ports. <a href="https://en.wikipedia.org/wiki/Aleph_kernel">Aleph</a></td></tr>
+<tr><td class="when">1981</td><td>Richard Rashid and George Robertson publish Accent at Carnegie Mellon. It has kernel-protected ports, network transparency and copy-on-write memory. <a href="https://dl.acm.org/doi/10.1145/800216.806593">Paper</a></td></tr>
+<tr><td class="when">1985</td><td>CMU starts Mach as a multiprocessor kernel compatible with 4.3BSD, funded by DARPA. <a href="https://cseweb.ucsd.edu/classes/fa08/cse221/papers/accetta86.pdf">Accetta et al., 1986</a></td></tr>
+<tr><td class="when">1986</td><td>The USENIX paper "Mach: A New Kernel Foundation for UNIX Development" describes tasks, threads, ports, messages and external pagers.</td></tr>
+<tr><td class="when">1988 to 1989</td><td>The Open Software Foundation builds OSF/1 from Mach 2.5 and part of the BSD kernel. NeXT ships NeXTSTEP 1.0, built on Mach, in 1989. <a href="https://en.wikipedia.org/wiki/OSF/1">OSF/1</a>, <a href="https://en.wikipedia.org/wiki/NeXTSTEP">NeXTSTEP</a></td></tr>
+<tr><td class="when">Early 1990s</td><td>Mach 3.0 moves the BSD code out of the kernel into user-space servers. <a href="https://en.wikipedia.org/wiki/Mach_(kernel)">Mach (kernel)</a></td></tr>
+<tr><td class="when">1994</td><td>CMU ends its Mach work. The University of Utah continues with Mach 4. <a href="https://www-old.cs.utah.edu/flux/mach4/html/Mach4-proj.html">Mach 4 project</a></td></tr>
+<tr><td class="when">1996</td><td>Apple and the OSF Research Institute release MkLinux, which runs Linux as a single server on Mach 3.0. In December Apple announces it will buy NeXT. <a href="https://en.wikipedia.org/wiki/MkLinux">MkLinux</a></td></tr>
+<tr><td class="when">1999 to 2001</td><td>Mac OS X Server 1.0 ships in 1999, Apple opens the Darwin core in 2000, and Mac OS X 10.0 ships in March 2001. Its kernel is XNU. <a href="https://en.wikipedia.org/wiki/XNU">XNU</a></td></tr>
+<tr><td class="when">2014</td><td>The ACM gives Mach its Software System Award. <a href="https://www.acm.org/media-center/2015/april/software-system-award-2014">ACM</a></td></tr>
+</table></div>
+<p class="note">The name comes from a joke. Team members suggested "muck" as a backronym for Multi-User Communication Kernel, and an Italian colleague, Dario Giuse, wrote it down as "Mach". See the Mach article on Wikipedia for the account.</p>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

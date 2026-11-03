@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Implementations - Mach kernel</title>
+<meta name="description" content="Kernels descended from or built on Mach, and their current status.">
+<link rel="canonical" href="https://machkernel.org/implementations.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="concepts.html">Concepts</a><a href="history.html">History</a><a href="implementations.html" aria-current="page">Implementations</a><a href="reading.html">Reading</a></nav>
+</header>
+<main id="main">
+<h1>Implementations</h1>
+<p>Mach has been forked many times. This table lists the ones most people ask about.</p>
+<div class="scroll"><table>
+<tr><th>Name</th><th>Origin</th><th>Notes</th></tr>
+<tr><td><a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/mach.html">CMU Mach</a></td><td>Carnegie Mellon, 1985 to 1994</td><td>The original. Mach 2.5 keeps BSD in the kernel, and Mach 3.0 is the microkernel. No longer developed.</td></tr>
+<tr><td><a href="https://www-old.cs.utah.edu/flux/mach4/html/Mach4-proj.html">Mach 4</a></td><td>University of Utah, 1994 to 1996</td><td>Built on CMU's Mach 3.0 code to fix its main problems. The GNU project moved to it for the Hurd.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/GNU_Mach">GNU Mach</a></td><td>GNU project, from 1996</td><td>Descends from Mach 4. It is still the default microkernel of the GNU Hurd.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/XNU">XNU</a></td><td>NeXT and Apple, 1990s to now</td><td>The kernel of macOS, iOS and the other Apple platforms. A modified Mach combined with BSD code and the IOKit driver framework in one kernel.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/OSF/1">OSF/1</a></td><td>Open Software Foundation, from 1988</td><td>Started from Mach 2.5 and later versions used Mach 3.0. Digital's version became Digital UNIX, then Tru64 UNIX. Discontinued.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/MkLinux">MkLinux</a></td><td>Apple and OSF Research Institute, 1996</td><td>Linux running as one server on Mach 3.0, for Power Macintosh. A demonstration of an OS personality in user space. Discontinued.</td></tr>
+<tr><td><a href="https://kyberos.org">KyberOS</a></td><td>New code, 2026</td><td>A pure Mach microkernel for x86_64 with no BSD code in the kernel. Early development, runs in QEMU. This site is written by its authors.</td></tr>
+</table></div>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>
