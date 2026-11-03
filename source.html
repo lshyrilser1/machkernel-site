@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading the source - Mach kernel</title>
+<meta name="description" content="Where to find Mach source code, and which directories to read first for ports, tasks, threads and virtual memory.">
+<link rel="canonical" href="https://machkernel.org/source.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="concepts.html">Concepts</a><a href="history.html">History</a><a href="implementations.html">Implementations</a><a href="questions.html">Questions</a><a href="source.html" aria-current="page">Source</a><a href="reading.html">Reading</a></nav>
+</header>
+<main id="main">
+<h1>Reading the source</h1>
+<p>Several Mach code bases are public. They have diverged, so it helps to know which one you are reading.</p>
+<h2>Where the code is</h2>
+<div class="scroll"><table>
+<tr><th>Tree</th><th>Use it for</th></tr>
+<tr><td><a href="https://github.com/apple-oss-distributions/xnu">XNU</a></td><td>The Mach code that ships today. Apple publishes it on GitHub. The <code>osfmk</code> directory holds the Mach-based subsystems and <code>bsd</code> holds the BSD layer. It is large and carries a lot of Apple-specific work.</td></tr>
+<tr><td><a href="https://git.savannah.gnu.org/cgit/hurd/gnumach.git">GNU Mach</a></td><td>A smaller tree, from the Mach 4 line, used by the GNU Hurd. A better place to see a Mach kernel without Apple's additions. MIG is packaged separately from it.</td></tr>
+<tr><td><a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/mach.html">CMU Mach project</a></td><td>The original project page, with links to sources and binaries, manuals, and the Mach-US multi-server work.</td></tr>
+<tr><td><a href="https://www-old.cs.utah.edu/flux/mach4/html/Mach4-proj.html">Mach 4 at Utah</a></td><td>The project that GNU Mach descends from.</td></tr>
+</table></div>
+<h2>Where things are in XNU</h2>
+<p>The directory names under <code>osfmk</code> follow the Mach subsystems:</p>
+<div class="scroll"><table>
+<tr><th>Directory</th><th>Contents</th></tr>
+<tr><td><code>osfmk/ipc</code></td><td>Ports, port rights and messages. Files include <code>ipc_port.c</code>, <code>ipc_right.c</code>, <code>ipc_space.c</code>, <code>ipc_kmsg.c</code>, <code>ipc_pset.c</code> and <code>mach_msg.c</code>.</td></tr>
+<tr><td><code>osfmk/kern</code></td><td>Tasks, threads, scheduling and the core kernel services.</td></tr>
+<tr><td><code>osfmk/vm</code></td><td>Virtual memory.</td></tr>
+<tr><td><code>osfmk/mach</code></td><td>The public interface: headers such as <code>message.h</code> and <code>port.h</code>, and MIG interface definitions such as <code>mach_port.defs</code>.</td></tr>
+<tr><td><code>osfmk/default_pager</code></td><td>The default pager, which backs anonymous memory.</td></tr>
+<tr><td><code>osfmk/i386</code>, <code>osfmk/x86_64</code>, <code>osfmk/arm64</code></td><td>Machine-dependent code.</td></tr>
+</table></div>
+<h2>A way in</h2>
+<p>Read the headers first. <code>osfmk/mach/message.h</code> shows what a message looks like, and <code>osfmk/mach/port.h</code> lists the kinds of port rights. Then read <code>osfmk/ipc/ipc_port.c</code> to see how the kernel represents a port. After that, follow a call such as <code>mach_msg</code> through <code>osfmk/ipc/mach_msg.c</code>.</p>
+<p>To see how the interface definitions turn into code, read a <code>.defs</code> file next to the MIG description in <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/mig.html">the MIG paper</a>. The <a href="concepts.html">concepts</a> page explains the terms used above.</p>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel OS. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

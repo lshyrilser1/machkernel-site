@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Common questions - Mach kernel</title>
+<meta name="description" content="Plain answers to common questions about Mach: speed, whether it is still used, how it relates to macOS, and how it compares with L4.">
+<link rel="canonical" href="https://machkernel.org/questions.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="concepts.html">Concepts</a><a href="history.html">History</a><a href="implementations.html">Implementations</a><a href="questions.html" aria-current="page">Questions</a><a href="source.html">Source</a><a href="reading.html">Reading</a></nav>
+</header>
+<main id="main">
+<h1>Common questions</h1>
+<p>Short answers, with the sources they rest on.</p>
+<h2>Is Mach slow?</h2>
+<p>The first microkernel systems built on Mach 3.0 were slower than monolithic UNIX kernels, and the cost was measured. Chen and Bershad compared Mach 3.0 running CMU's UNIX server with DEC's monolithic Ultrix on thirteen workloads. Mach executed substantially more system instructions for the same work, and each instruction cost more memory cycles (<a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/os-memorysys.html">abstract</a>).</p>
+<p>Message passing was a large part of the cost. In 1993 Jochen Liedtke showed that a kernel designed around IPC could be far faster. His L4 kernel, written in hand-tuned i386 assembly, is described as about 20 times faster than Mach at IPC (<a href="https://en.wikipedia.org/wiki/L4_microkernel_family">L4 microkernel family</a>, <a href="https://rcs.uwaterloo.ca/papers/l4.pdf">Liedtke's paper</a>). Mach's own developers worked on the problem too, for example with <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/threadmgnt.html">continuations</a> and <a href="https://www.usenix.org/legacy/publications/library/proceedings/sf94/full_papers/ford.pdf">migrating threads</a>.</p>
+<p>So the answer depends on the design. A system that sends every UNIX call through a separate server pays for it. XNU avoids that by running BSD inside the kernel.</p>
+<h2>Is Mach dead?</h2>
+<p>The CMU project ended in 1994, but the kernel did not. XNU, which is built on Mach, runs on Apple's platforms, and Apple reported more than 2 billion active devices in early 2023 (<a href="https://www.sec.gov/Archives/edgar/data/320193/000032019323000005/a8-kex991q1202312312022.htm">Apple's Form 8-K</a>). GNU Mach is still the default microkernel of the GNU Hurd (<a href="https://en.wikipedia.org/wiki/GNU_Mach">GNU Mach</a>). What has become rare is the pure design, with every operating system service outside the kernel.</p>
+<h2>Is macOS a microkernel?</h2>
+<p>No. Apple's Kernel Programming Guide says the kernel environment in OS X includes the Mach kernel, BSD, the I/O Kit, file systems and networking components, and that these are often referred to together as the kernel. The BSD layer is based on FreeBSD code (<a href="https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html">Kernel Architecture Overview</a>). The XNU README calls it a hybrid kernel (<a href="https://github.com/apple-oss-distributions/xnu">XNU on GitHub</a>). Mach is one part of it.</p>
+<h2>How is Mach different from L4?</h2>
+<p>They answer the same question, how small a kernel can be, with different priorities. Mach has a rich set of abstractions: ports with several kinds of rights, port sets, user-space pagers and copy-on-write messages. L4 started from the goal of making IPC as fast as possible and added little else. The L4 family now includes seL4, which has a formal proof of functional correctness (<a href="https://en.wikipedia.org/wiki/L4_microkernel_family">L4 microkernel family</a>). Mach has no such proof.</p>
+<h2>Can I run Mach today?</h2>
+<p>Yes, in two ways. Every Mac, iPhone and iPad runs XNU, which contains Mach, though you use it through the BSD layer. For a Mach microkernel you can boot, GNU Mach runs under the GNU Hurd, and Debian packages it. The <a href="implementations.html">implementations</a> page lists the others, and <a href="source.html">the source page</a> shows where to read the code.</p>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel OS. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>
