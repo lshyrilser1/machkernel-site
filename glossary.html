@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary - Mach kernel</title>
+<meta name="description" content="Short definitions of Mach terms: task, thread, port, port right, message, pager, MIG, personality and more.">
+<link rel="canonical" href="https://machkernel.org/glossary.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="concepts.html">Concepts</a><a href="glossary.html" aria-current="page">Glossary</a><a href="history.html">History</a><a href="implementations.html">Implementations</a><a href="questions.html">Questions</a><a href="source.html">Source</a><a href="reading.html">Reading</a></nav>
+</header>
+<main id="main">
+<h1>Glossary</h1>
+<p>Terms used on this site and in Mach papers, in alphabetical order.</p>
+<dl>
+<dt id="backronym">Backronym</dt>
+<dd>A phrase invented after the fact to fit a name. "Muck", a joke expansion of Multi-User Communication Kernel, is the backronym behind the spelling "Mach". See <a href="history.html">History</a>.</dd>
+<dt id="bootstrap-port">Bootstrap port</dt>
+<dd>A port a task is given at start-up that leads to a server which hands out other ports by name. It is how programs find services without a global namespace. On macOS the launch daemon plays this part.</dd>
+<dt id="capability">Capability</dt>
+<dd>A token that grants access to something and cannot be forged. In Mach a port right works as one: what a program can do depends on the rights it holds.</dd>
+<dt id="continuation">Continuation</dt>
+<dd>A way of blocking a thread without keeping its kernel stack. The thread resumes by calling a saved function. Mach 3.0 used it to cut per-thread space and speed up some paths (<a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/threadmgnt.html">paper</a>).</dd>
+<dt id="copy-on-write">Copy-on-write</dt>
+<dd>Two parties share a page until one writes to it, and the write makes a private copy first. Mach uses it for inherited memory and for large message bodies.</dd>
+<dt id="dead-name">Dead name</dt>
+<dd>What a port right becomes when its port is destroyed. The holder still has the name, but sending to it fails.</dd>
+<dt id="default-pager">Default pager</dt>
+<dd>The pager that backs ordinary anonymous memory, such as heap and stack pages that have no file behind them.</dd>
+<dt id="exception-port">Exception port</dt>
+<dd>A port that receives a message when a thread faults, so a handler outside the faulting thread can deal with it. The 1988 Mach exception handling paper is listed in the <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/publications.html">CMU publication archive</a>.</dd>
+<dt id="external-pager">External pager</dt>
+<dd>A user-space program that supplies the pages of a memory object when the kernel needs them. See <a href="concepts.html">Concepts</a>.</dd>
+<dt id="gnu-hurd">GNU Hurd</dt>
+<dd>A set of servers that run on a Mach microkernel and together make up an operating system. Its default microkernel is GNU Mach. See <a href="implementations.html">Implementations</a>.</dd>
+<dt id="hybrid-kernel">Hybrid kernel</dt>
+<dd>A kernel that keeps a microkernel core but runs a large part of the operating system inside the kernel too. Apple describes XNU this way. See <a href="questions.html">Common questions</a>.</dd>
+<dt id="ipc">IPC</dt>
+<dd>Inter-process communication. In Mach this means sending messages to ports.</dd>
+<dt id="l4">L4</dt>
+<dd>A family of microkernels that started with Jochen Liedtke in 1993 and put fast IPC first. It includes seL4. See <a href="questions.html">Common questions</a>.</dd>
+<dt id="memory-object">Memory object</dt>
+<dd>The thing that backs a region of a task's address space. A pager supplies its pages.</dd>
+<dt id="message">Message</dt>
+<dd>A unit of communication sent to a port. It can carry plain data, port rights and regions of memory.</dd>
+<dt id="microkernel">Microkernel</dt>
+<dd>A kernel that keeps only the essentials, usually scheduling, memory and message passing, and runs everything else as ordinary programs.</dd>
+<dt id="mig">MIG</dt>
+<dd>The Mach Interface Generator. It compiles an interface definition into the stubs that turn a procedure call into a message and back (<a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/mig.html">paper</a>).</dd>
+<dt id="monolithic-kernel">Monolithic kernel</dt>
+<dd>A kernel that runs the file systems, drivers and network stack inside one privileged program. Linux is an example.</dd>
+<dt id="os-personality">OS personality</dt>
+<dd>A server, with a small stub in each program, that gives programs the interface of a particular operating system. See <a href="concepts.html">Concepts</a>.</dd>
+<dt id="pager">Pager</dt>
+<dd>See external pager.</dd>
+<dt id="port">Port</dt>
+<dd>A message queue that the kernel owns and protects. Programs reach it only through port rights.</dd>
+<dt id="port-name">Port name</dt>
+<dd>A number a task uses to refer to a port right it holds. The name means something only inside that task.</dd>
+<dt id="port-right">Port right</dt>
+<dd>Permission to use a port. The kinds are receive, send and send-once. See <a href="concepts.html">Concepts</a>.</dd>
+<dt id="port-set">Port set</dt>
+<dd>A group of ports that a thread can wait on at once, receiving from whichever one has a message first.</dd>
+<dt id="receive-right">Receive right</dt>
+<dd>The right to take messages off a port. Only one task holds it at a time.</dd>
+<dt id="sel4">seL4</dt>
+<dd>A microkernel in the L4 family with a formal proof of functional correctness. Mach has no such proof.</dd>
+<dt id="send-right">Send right</dt>
+<dd>The right to send messages to a port. Any number of tasks can hold one.</dd>
+<dt id="send-once-right">Send-once right</dt>
+<dd>A right that allows exactly one send. It is used for replies.</dd>
+<dt id="task">Task</dt>
+<dd>A container for resources: an address space and a set of port rights. It runs nothing by itself.</dd>
+<dt id="thread">Thread</dt>
+<dd>The unit of execution. It runs inside a task, and a task can have many.</dd>
+<dt id="xnu">XNU</dt>
+<dd>The kernel of Apple's macOS, iOS and other platforms. It combines a modified Mach, BSD code and the I/O Kit. The name stands for "X is Not Unix".</dd>
+</dl>
+</main>
+<footer>
+<p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
+<p>Written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a Mach microkernel OS. Corrections are welcome: <a href="https://github.com/lshyrilser1/machkernel-site/issues">open an issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>
