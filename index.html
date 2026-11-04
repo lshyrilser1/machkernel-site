@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mach kernel</title>
-<meta name="description" content="A short reference on the Mach kernel: what it is, how it works, where it came from and where it runs today.">
+<meta name="description" content="Welcome to a short, independent reference on the Mach kernel: what it is, where it came from, where it runs today and where to start reading.">
 <link rel="canonical" href="https://machkernel.org/">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -16,21 +16,29 @@
 <nav aria-label="Pages"><a href="index.html" aria-current="page">Home</a><a href="concepts.html">Concepts</a><a href="glossary.html">Glossary</a><a href="history.html">History</a><a href="implementations.html">Implementations</a><a href="questions.html">Questions</a><a href="source.html">Source</a><a href="reading.html">Reading</a></nav>
 </header>
 <main id="main">
-<h1>The Mach kernel</h1>
-<p>Mach is an operating system kernel that began at Carnegie Mellon University in 1985. It rests on a simple claim: a kernel needs only a few things. It needs a way to run code (tasks and threads), a way to manage memory, and a way for programs to send each other messages. Everything else, such as file systems and device drivers, can run as ordinary programs outside the kernel.</p>
+<h1>Welcome to machkernel.org</h1>
+<p class="note">Yes, this is the other kind of kernel. No popcorn here, though you are welcome to bring some.</p>
+<p>Hello, and thank you for stopping by. This is a short, independent reference on the Mach kernel. You may have met the name in macOS, in the GNU Hurd or in an operating systems course. Whatever brought you here, we are glad you came, and you do not need to know anything about kernels to start.</p>
+<p>We keep things small. Even a microkernel knows when to stop.</p>
+<h2>What Mach is</h2>
+<p>Mach is an operating system kernel that began at Carnegie Mellon University in 1985. It rests on a simple claim: a kernel needs only a few things. It needs a way to run code (tasks and threads), a way to manage memory, and a way for programs to send each other messages. Everything else, such as file systems and device drivers, can run as ordinary programs outside the kernel. The kernel stays small, and the rest of the system gets on with its own business.</p>
 <p>The CMU project ended in 1994, but the kernel kept going. Mach is the base of XNU, the kernel inside Apple's macOS and iOS, and it is the default microkernel of the GNU Hurd. Its virtual memory design was adopted into 4.4BSD and is still in FreeBSD.</p>
-<p>This site is a short reference for people who want to know what Mach is and where to read more. It does not try to be complete.</p>
-<h2>Pages</h2>
+<h2>Where to start</h2>
 <dl>
-<dt><a href="concepts.html">Concepts</a></dt>
-<dd>Tasks, threads, ports, messages and virtual memory, in plain terms.</dd>
-<dt><a href="history.html">History</a></dt>
-<dd>From Rochester in the 1970s to the devices that run Mach today.</dd>
-<dt><a href="implementations.html">Implementations</a></dt>
-<dd>The kernels descended from Mach, and which ones are still alive.</dd>
-<dt><a href="reading.html">Reading</a></dt>
-<dd>The original papers, the CMU archive and some later criticism.</dd>
+<dt>I am new to kernels</dt>
+<dd>Read <a href="concepts.html">Concepts</a> first. It covers tasks, threads, ports, messages and virtual memory in plain terms. If a word is unfamiliar, the <a href="glossary.html">Glossary</a> has a short definition.</dd>
+<dt>I want to know how Mach got here</dt>
+<dd><a href="history.html">History</a> runs from Rochester in the 1970s to the devices that run Mach today.</dd>
+<dt>I have a specific question</dt>
+<dd><a href="questions.html">Common questions</a> answers things like whether Mach is slow, whether it is still used, and how it compares with L4. We answer the speed one honestly, and we promise not to panic.</dd>
+<dt>I want to know which systems use it</dt>
+<dd><a href="implementations.html">Implementations</a> lists the kernels descended from Mach and which ones are still alive.</dd>
+<dt>I want to read the code</dt>
+<dd><a href="source.html">Reading the source</a> says where to find it and which directories to open first. <a href="reading.html">Reading</a> lists the original papers, the CMU archive and some later criticism.</dd>
 </dl>
+<h2>About this site</h2>
+<p>The site is small on purpose and does not try to be complete. It is not run by Carnegie Mellon University, Apple or the GNU project. It is written and maintained by the people building <a href="https://kyberos.org">KyberOS</a>, a pure Mach microkernel OS.</p>
+<p>If you find a mistake, or something is unclear, please tell us. <a href="https://github.com/lshyrilser1/machkernel-site/issues">Open an issue</a> or send a pull request. Corrections are welcome and we will say thank you. Nobody will ask you to restart anything.</p>
 </main>
 <footer>
 <p>An independent reference on the Mach kernel. It is not run by Carnegie Mellon University, Apple or the GNU project.</p>
