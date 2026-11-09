@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conceptos - Núcleo Mach</title>
+<meta name="description" content="Las ideas principales de Mach: tareas, hilos, puertos, mensajes y memoria virtual.">
+<link rel="canonical" href="https://machkernel.org/es/concepts.html">
+<link rel="alternate" hreflang="en" href="https://machkernel.org/concepts.html">
+<link rel="alternate" hreflang="es-MX" href="https://machkernel.org/es/concepts.html">
+<link rel="alternate" hreflang="x-default" href="https://machkernel.org/concepts.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Páginas"><a href="index.html">Inicio</a><a href="concepts.html" aria-current="page">Conceptos</a><a href="glossary.html">Glosario</a><a href="history.html">Historia</a><a href="implementations.html">Implementaciones</a><a href="questions.html">Preguntas</a><a href="source.html">Código fuente</a><a href="reading.html">Lecturas</a><a href="../concepts.html" hreflang="en" lang="en">English</a></nav>
+</header>
+<main id="main">
+<h1>Conceptos</h1>
+<p>El artículo de USENIX de 1986 que presentó Mach describe cuatro abstracciones básicas: tareas, hilos, puertos y mensajes. La administración de memoria se construye alrededor de ellas. Esta página explica cada una en pocas frases.</p>
+<h2>Tareas e hilos</h2>
+<p>Una <em>tarea</em> es un contenedor de recursos. Tiene un espacio de direcciones y un conjunto de derechos de puerto, y por sí sola no ejecuta nada. Un <em>hilo</em> es la unidad de ejecución. Corre dentro de una tarea, y una tarea puede tener muchos hilos. Esto es distinto de un proceso de UNIX, que junta las dos ideas en un solo objeto.</p>
+<h2>Puertos y derechos de puerto</h2>
+<p>Un <em>puerto</em> es una cola de mensajes que el núcleo posee y protege. Los programas nunca tocan la cola directamente. Tienen <em>derechos de puerto</em>, que son permisos para usar un puerto. Los derechos principales son:</p>
+<ul>
+<li><b>recepción</b>, que deja a quien lo tiene sacar mensajes de la cola. Solo una tarea lo tiene a la vez.</li>
+<li><b>envío</b>, que deja a quien lo tiene poner mensajes en la cola. Cualquier cantidad de tareas puede tenerlo.</li>
+<li><b>envío único</b>, que permite un solo envío y se usa para las respuestas.</li>
+</ul>
+<p>Una tarea solo puede llegar a los puertos que se le han dado. Por eso un derecho de puerto funciona como una capacidad: lo que un programa puede hacer depende de lo que tiene, no de quién es.</p>
+<h2>Mensajes</h2>
+<p>Los hilos se comunican mandando mensajes a los puertos. Un mensaje puede llevar datos simples, derechos de puerto y grandes regiones de memoria. La memoria se envía sin copiarla de entrada: quien recibe obtiene un mapeo de copia al escribir, y las páginas se copian solo si alguno de los dos lados escribe en ellas.</p>
+<p>Escribir a mano el código para enviar y recibir es tedioso, así que Mach vino con MIG, el generador de interfaces de Mach (Mach Interface Generator). Lee una definición de interfaz y produce los resguardos (stubs) que convierten una llamada a un procedimiento en un mensaje y viceversa.</p>
+<h2>Memoria virtual</h2>
+<p>Cada tarea tiene su propio espacio de direcciones, formado por regiones respaldadas por <em>objetos de memoria</em>. Mach permite que un objeto de memoria lo administre un programa en espacio de usuario llamado paginador externo, que entrega las páginas cuando el núcleo las necesita. La copia al escribir se usa en todas partes, incluso para la memoria que las tareas heredan al crearse.</p>
+<h2>Servidores y personalidades</h2>
+<p>En Mach 2.5 el código de BSD vivía dentro del núcleo. Mach 3.0 lo sacó a servidores en espacio de usuario, y eso es lo que lo hace un micronúcleo en sentido estricto. Un programa habla con un servidor mandándole mensajes, y varias interfaces de sistema operativo pueden compartir un mismo núcleo. Las primeras demostraciones corrieron BSD, DOS y Linux de esta manera. XNU, de Apple, no siguió este camino y mantiene BSD dentro del núcleo.</p>
+</main>
+<footer>
+<p>Una referencia independiente sobre el núcleo Mach. No la operan la Universidad Carnegie Mellon, Apple ni el proyecto GNU.</p>
+<p>La escriben y mantienen las personas que construyen <a href="https://kyberos.org/es/">KyberOS</a>, un sistema operativo con micronúcleo Mach. Las correcciones son bienvenidas: <a href="https://github.com/lshyrilser1/machkernel-site/issues">abre un issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>
