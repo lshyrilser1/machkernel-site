@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Núcleo Mach</title>
+<meta name="description" content="Te damos la bienvenida a una referencia breve e independiente sobre el núcleo Mach: qué es, de dónde viene, dónde corre hoy y por dónde empezar a leer.">
+<link rel="canonical" href="https://machkernel.org/es/">
+<link rel="alternate" hreflang="en" href="https://machkernel.org/">
+<link rel="alternate" hreflang="es-MX" href="https://machkernel.org/es/">
+<link rel="alternate" hreflang="x-default" href="https://machkernel.org/">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Páginas"><a href="index.html" aria-current="page">Inicio</a><a href="concepts.html">Conceptos</a><a href="glossary.html">Glosario</a><a href="history.html">Historia</a><a href="implementations.html">Implementaciones</a><a href="questions.html">Preguntas</a><a href="source.html">Código fuente</a><a href="reading.html">Lecturas</a><a href="../" hreflang="en" lang="en">English</a></nav>
+</header>
+<main id="main">
+<h1>Te damos la bienvenida a machkernel.org</h1>
+<p class="note">Sí, este es el otro tipo de kernel. Aquí no hay palomitas, aunque puedes traer las tuyas.</p>
+<p>Hola, y gracias por pasar por aquí. Esta es una referencia breve e independiente sobre el núcleo Mach. Quizás conociste el nombre en macOS, en el GNU Hurd o en un curso de sistemas operativos. Sea lo que sea que te trajo, nos da gusto que vinieras, y no necesitas saber nada de núcleos para empezar.</p>
+<p>Mantenemos las cosas pequeñas. Hasta un micronúcleo sabe cuándo parar.</p>
+<h2>Qué es Mach</h2>
+<p>Mach es un núcleo de sistema operativo que nació en la Universidad Carnegie Mellon en 1985. Parte de una idea sencilla: un núcleo solo necesita unas pocas cosas. Necesita una forma de ejecutar código (tareas e hilos), una forma de administrar la memoria y una forma de que los programas se manden mensajes entre sí. Todo lo demás, como los sistemas de archivos y los controladores de dispositivos, puede correr como programas comunes fuera del núcleo. El núcleo se mantiene pequeño y el resto del sistema se ocupa de lo suyo.</p>
+<p>El proyecto de CMU terminó en 1994, pero el núcleo siguió adelante. Mach es la base de XNU, el núcleo dentro de macOS y iOS de Apple, y es el micronúcleo predeterminado del GNU Hurd. Su diseño de memoria virtual se adoptó en 4.4BSD y todavía está en FreeBSD.</p>
+<h2>Por dónde empezar</h2>
+<dl>
+<dt>Soy nuevo en esto de los núcleos</dt>
+<dd>Lee primero <a href="concepts.html">Conceptos</a>. Explica tareas, hilos, puertos, mensajes y memoria virtual con palabras sencillas. Si alguna palabra no te suena, el <a href="glossary.html">Glosario</a> tiene una definición corta.</dd>
+<dt>Quiero saber cómo llegó Mach hasta aquí</dt>
+<dd><a href="history.html">Historia</a> va desde Rochester en los años setenta hasta los dispositivos que hoy corren Mach.</dd>
+<dt>Tengo una pregunta concreta</dt>
+<dd><a href="questions.html">Preguntas frecuentes</a> responde cosas como si Mach es lento, si todavía se usa y cómo se compara con L4. La de la velocidad la contestamos con honestidad, y prometemos no entrar en pánico.</dd>
+<dt>Quiero saber qué sistemas lo usan</dt>
+<dd><a href="implementations.html">Implementaciones</a> enumera los núcleos que descienden de Mach y cuáles siguen vivos.</dd>
+<dt>Quiero leer el código</dt>
+<dd><a href="source.html">Cómo leer el código</a> dice dónde encontrarlo y qué directorios abrir primero. <a href="reading.html">Lecturas</a> reúne los artículos originales, el archivo de CMU y algunas críticas posteriores.</dd>
+</dl>
+<h2>Acerca de este sitio</h2>
+<p>El sitio es pequeño a propósito y no pretende ser completo. No lo opera la Universidad Carnegie Mellon, Apple ni el proyecto GNU. Lo escriben y mantienen las personas que construyen <a href="https://kyberos.org/es/">KyberOS</a>, un sistema operativo con micronúcleo Mach puro.</p>
+<p>Si encuentras un error, o algo no queda claro, por favor avísanos. <a href="https://github.com/lshyrilser1/machkernel-site/issues">Abre un issue</a> o manda un pull request. Las correcciones son bienvenidas y te daremos las gracias. Nadie te va a pedir que reinicies nada.</p>
+</main>
+<footer>
+<p>Una referencia independiente sobre el núcleo Mach. No la operan la Universidad Carnegie Mellon, Apple ni el proyecto GNU.</p>
+<p>La escriben y mantienen las personas que construyen <a href="https://kyberos.org/es/">KyberOS</a>, un sistema operativo con micronúcleo Mach. Las correcciones son bienvenidas: <a href="https://github.com/lshyrilser1/machkernel-site/issues">abre un issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

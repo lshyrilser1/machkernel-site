@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Implementaciones - Núcleo Mach</title>
+<meta name="description" content="Núcleos que descienden de Mach o se construyeron sobre él, y su estado actual.">
+<link rel="canonical" href="https://machkernel.org/es/implementations.html">
+<link rel="alternate" hreflang="en" href="https://machkernel.org/implementations.html">
+<link rel="alternate" hreflang="es-MX" href="https://machkernel.org/es/implementations.html">
+<link rel="alternate" hreflang="x-default" href="https://machkernel.org/implementations.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Páginas"><a href="index.html">Inicio</a><a href="concepts.html">Conceptos</a><a href="glossary.html">Glosario</a><a href="history.html">Historia</a><a href="implementations.html" aria-current="page">Implementaciones</a><a href="questions.html">Preguntas</a><a href="source.html">Código fuente</a><a href="reading.html">Lecturas</a><a href="../implementations.html" hreflang="en" lang="en">English</a></nav>
+</header>
+<main id="main">
+<h1>Implementaciones</h1>
+<p>Mach se ha bifurcado muchas veces. Esta tabla enumera las que más preguntan.</p>
+<div class="scroll"><table>
+<tr><th>Nombre</th><th>Origen</th><th>Notas</th></tr>
+<tr><td><a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/mach.html">CMU Mach</a></td><td>Carnegie Mellon, 1985 a 1994</td><td>El original. Mach 2.5 mantiene BSD en el núcleo y Mach 3.0 es el micronúcleo. Ya no se desarrolla.</td></tr>
+<tr><td><a href="https://www-old.cs.utah.edu/flux/mach4/html/Mach4-proj.html">Mach 4</a></td><td>Universidad de Utah, 1994 a 1996</td><td>Construido sobre el código de Mach 3.0 de CMU para corregir sus principales problemas. El proyecto GNU se pasó a él para el Hurd.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/GNU_Mach">GNU Mach</a></td><td>Proyecto GNU, desde 1996</td><td>Desciende de Mach 4. Sigue siendo el micronúcleo predeterminado del GNU Hurd.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/XNU">XNU</a></td><td>NeXT y Apple, de los noventa a hoy</td><td>El núcleo de macOS, iOS y las demás plataformas de Apple. Un Mach modificado combinado con código de BSD y el marco de controladores IOKit en un solo núcleo.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/OSF/1">OSF/1</a></td><td>Open Software Foundation, desde 1988</td><td>Partió de Mach 2.5 y las versiones posteriores usaron Mach 3.0. La versión de Digital se volvió Digital UNIX y luego Tru64 UNIX. Descontinuado.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/MkLinux">MkLinux</a></td><td>Apple y OSF Research Institute, 1996</td><td>Linux corriendo como un solo servidor sobre Mach 3.0, para Power Macintosh. Una demostración de una personalidad de SO en espacio de usuario. Descontinuado.</td></tr>
+<tr><td><a href="https://kyberos.org/es/">Mach X</a></td><td>Código nuevo, 2026</td><td>El núcleo de KyberOS. Un micronúcleo Mach puro para x86_64, sin código de BSD en el núcleo. Está en desarrollo temprano y corre en QEMU. Este sitio lo escriben sus autores.</td></tr>
+</table></div>
+</main>
+<footer>
+<p>Una referencia independiente sobre el núcleo Mach. No la operan la Universidad Carnegie Mellon, Apple ni el proyecto GNU.</p>
+<p>La escriben y mantienen las personas que construyen <a href="https://kyberos.org/es/">KyberOS</a>, un sistema operativo con micronúcleo Mach. Las correcciones son bienvenidas: <a href="https://github.com/lshyrilser1/machkernel-site/issues">abre un issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo leer el código - Núcleo Mach</title>
+<meta name="description" content="Dónde encontrar el código fuente de Mach y qué directorios leer primero para puertos, tareas, hilos y memoria virtual.">
+<link rel="canonical" href="https://machkernel.org/es/source.html">
+<link rel="alternate" hreflang="en" href="https://machkernel.org/source.html">
+<link rel="alternate" hreflang="es-MX" href="https://machkernel.org/es/source.html">
+<link rel="alternate" hreflang="x-default" href="https://machkernel.org/source.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Páginas"><a href="index.html">Inicio</a><a href="concepts.html">Conceptos</a><a href="glossary.html">Glosario</a><a href="history.html">Historia</a><a href="implementations.html">Implementaciones</a><a href="questions.html">Preguntas</a><a href="source.html" aria-current="page">Código fuente</a><a href="reading.html">Lecturas</a><a href="../source.html" hreflang="en" lang="en">English</a></nav>
+</header>
+<main id="main">
+<h1>Cómo leer el código</h1>
+<p>Hay varios códigos de Mach públicos. Se han separado entre sí, así que conviene saber cuál estás leyendo.</p>
+<h2>Dónde está el código</h2>
+<div class="scroll"><table>
+<tr><th>Árbol</th><th>Para qué usarlo</th></tr>
+<tr><td><a href="https://github.com/apple-oss-distributions/xnu">XNU</a></td><td>El código de Mach que se distribuye hoy. Apple lo publica en GitHub. El directorio <code>osfmk</code> contiene los subsistemas basados en Mach y <code>bsd</code> contiene la capa BSD. Es grande y trae mucho trabajo específico de Apple.</td></tr>
+<tr><td><a href="https://git.savannah.gnu.org/cgit/hurd/gnumach.git">GNU Mach</a></td><td>Un árbol más pequeño, de la línea de Mach 4, que usa el GNU Hurd. Un mejor lugar para ver un núcleo Mach sin los agregados de Apple. MIG se empaqueta aparte.</td></tr>
+<tr><td><a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/mach.html">Proyecto Mach de CMU</a></td><td>La página original del proyecto, con enlaces a fuentes y binarios, manuales y el trabajo multiservidor de Mach-US.</td></tr>
+<tr><td><a href="https://www-old.cs.utah.edu/flux/mach4/html/Mach4-proj.html">Mach 4 en Utah</a></td><td>El proyecto del que desciende GNU Mach.</td></tr>
+</table></div>
+<h2>Dónde está cada cosa en XNU</h2>
+<p>Los nombres de directorio bajo <code>osfmk</code> siguen los subsistemas de Mach:</p>
+<div class="scroll"><table>
+<tr><th>Directorio</th><th>Contenido</th></tr>
+<tr><td><code>osfmk/ipc</code></td><td>Puertos, derechos de puerto y mensajes. Algunos archivos son <code>ipc_port.c</code>, <code>ipc_right.c</code>, <code>ipc_space.c</code>, <code>ipc_kmsg.c</code>, <code>ipc_pset.c</code> y <code>mach_msg.c</code>.</td></tr>
+<tr><td><code>osfmk/kern</code></td><td>Tareas, hilos, planificación y los servicios centrales del núcleo.</td></tr>
+<tr><td><code>osfmk/vm</code></td><td>Memoria virtual.</td></tr>
+<tr><td><code>osfmk/mach</code></td><td>La interfaz pública: encabezados como <code>message.h</code> y <code>port.h</code>, y definiciones de interfaz de MIG como <code>mach_port.defs</code>.</td></tr>
+<tr><td><code>osfmk/default_pager</code></td><td>El paginador predeterminado, que respalda la memoria anónima.</td></tr>
+<tr><td><code>osfmk/i386</code>, <code>osfmk/x86_64</code>, <code>osfmk/arm64</code></td><td>Código que depende de la máquina.</td></tr>
+</table></div>
+<h2>Una forma de entrar</h2>
+<p>Lee primero los encabezados. <code>osfmk/mach/message.h</code> muestra cómo es un mensaje, y <code>osfmk/mach/port.h</code> enumera los tipos de derechos de puerto. Luego lee <code>osfmk/ipc/ipc_port.c</code> para ver cómo representa el núcleo un puerto. Después, sigue una llamada como <code>mach_msg</code> por <code>osfmk/ipc/mach_msg.c</code>.</p>
+<p>Para ver cómo las definiciones de interfaz se convierten en código, lee un archivo <code>.defs</code> junto con la descripción de MIG en <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/mig.html">el artículo de MIG</a>. La página de <a href="concepts.html">conceptos</a> explica los términos usados arriba.</p>
+</main>
+<footer>
+<p>Una referencia independiente sobre el núcleo Mach. No la operan la Universidad Carnegie Mellon, Apple ni el proyecto GNU.</p>
+<p>La escriben y mantienen las personas que construyen <a href="https://kyberos.org/es/">KyberOS</a>, un sistema operativo con micronúcleo Mach. Las correcciones son bienvenidas: <a href="https://github.com/lshyrilser1/machkernel-site/issues">abre un issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

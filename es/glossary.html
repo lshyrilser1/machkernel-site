@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glosario - Núcleo Mach</title>
+<meta name="description" content="Definiciones breves de términos de Mach: tarea, hilo, puerto, derecho de puerto, mensaje, paginador, MIG, personalidad y más.">
+<link rel="canonical" href="https://machkernel.org/es/glossary.html">
+<link rel="alternate" hreflang="en" href="https://machkernel.org/glossary.html">
+<link rel="alternate" hreflang="es-MX" href="https://machkernel.org/es/glossary.html">
+<link rel="alternate" hreflang="x-default" href="https://machkernel.org/glossary.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Páginas"><a href="index.html">Inicio</a><a href="concepts.html">Conceptos</a><a href="glossary.html" aria-current="page">Glosario</a><a href="history.html">Historia</a><a href="implementations.html">Implementaciones</a><a href="questions.html">Preguntas</a><a href="source.html">Código fuente</a><a href="reading.html">Lecturas</a><a href="../glossary.html" hreflang="en" lang="en">English</a></nav>
+</header>
+<main id="main">
+<h1>Glosario</h1>
+<p>Términos que se usan en este sitio y en los artículos sobre Mach, en orden alfabético. El término en inglés va entre paréntesis cuando difiere.</p>
+<dl>
+<dt id="backronym">Acrónimo retroactivo (backronym)</dt>
+<dd>Una frase inventada después para que encaje con un nombre. «Muck», una expansión de broma de Multi-User Communication Kernel, es el acrónimo retroactivo detrás de la escritura «Mach». Consulta <a href="history.html">Historia</a>.</dd>
+<dt id="capability">Capacidad (capability)</dt>
+<dd>Un token que da acceso a algo y no se puede falsificar. En Mach un derecho de puerto funciona como una: lo que un programa puede hacer depende de los derechos que tiene.</dd>
+<dt id="port-set">Conjunto de puertos (port set)</dt>
+<dd>Un grupo de puertos en los que un hilo puede esperar a la vez, recibiendo del primero que tenga un mensaje.</dd>
+<dt id="continuation">Continuación (continuation)</dt>
+<dd>Una forma de bloquear un hilo sin conservar su pila del núcleo. El hilo se reanuda llamando a una función guardada. Mach 3.0 la usó para reducir el espacio por hilo y acelerar algunas rutas (<a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/threadmgnt.html">artículo</a>).</dd>
+<dt id="copy-on-write">Copia al escribir (copy-on-write)</dt>
+<dd>Dos partes comparten una página hasta que una escribe en ella, y la escritura hace primero una copia privada. Mach la usa para la memoria heredada y para los cuerpos grandes de mensajes.</dd>
+<dt id="send-right">Derecho de envío (send right)</dt>
+<dd>El derecho de mandar mensajes a un puerto. Cualquier cantidad de tareas puede tener uno.</dd>
+<dt id="send-once-right">Derecho de envío único (send-once right)</dt>
+<dd>Un derecho que permite exactamente un envío. Se usa para las respuestas.</dd>
+<dt id="port-right">Derecho de puerto (port right)</dt>
+<dd>Permiso para usar un puerto. Los tipos son recepción, envío y envío único. Consulta <a href="concepts.html">Conceptos</a>.</dd>
+<dt id="receive-right">Derecho de recepción (receive right)</dt>
+<dd>El derecho de sacar mensajes de un puerto. Solo una tarea lo tiene a la vez.</dd>
+<dt id="gnu-hurd">GNU Hurd</dt>
+<dd>Un conjunto de servidores que corren sobre un micronúcleo Mach y juntos forman un sistema operativo. Su micronúcleo predeterminado es GNU Mach. Consulta <a href="implementations.html">Implementaciones</a>.</dd>
+<dt id="thread">Hilo (thread)</dt>
+<dd>La unidad de ejecución. Corre dentro de una tarea, y una tarea puede tener muchos.</dd>
+<dt id="ipc">IPC</dt>
+<dd>Comunicación entre procesos (inter-process communication). En Mach significa mandar mensajes a puertos.</dd>
+<dt id="l4">L4</dt>
+<dd>Una familia de micronúcleos que empezó con Jochen Liedtke en 1993 y puso la IPC rápida por delante de todo. Incluye seL4. Consulta <a href="questions.html">Preguntas frecuentes</a>.</dd>
+<dt id="message">Mensaje (message)</dt>
+<dd>Una unidad de comunicación que se envía a un puerto. Puede llevar datos simples, derechos de puerto y regiones de memoria.</dd>
+<dt id="microkernel">Micronúcleo (microkernel)</dt>
+<dd>Un núcleo que conserva solo lo esencial, normalmente planificación, memoria y paso de mensajes, y ejecuta todo lo demás como programas comunes.</dd>
+<dt id="mig">MIG</dt>
+<dd>El generador de interfaces de Mach (Mach Interface Generator). Compila una definición de interfaz en los resguardos que convierten una llamada a un procedimiento en un mensaje y viceversa (<a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/mig.html">artículo</a>).</dd>
+<dt id="port-name">Nombre de puerto (port name)</dt>
+<dd>Un número que una tarea usa para referirse a un derecho de puerto que tiene. El nombre solo significa algo dentro de esa tarea.</dd>
+<dt id="dead-name">Nombre muerto (dead name)</dt>
+<dd>Lo que se vuelve un derecho de puerto cuando su puerto se destruye. Quien lo tiene conserva el nombre, pero enviarle algo falla.</dd>
+<dt id="hybrid-kernel">Núcleo híbrido (hybrid kernel)</dt>
+<dd>Un núcleo que conserva un centro de micronúcleo pero también ejecuta dentro del núcleo una buena parte del sistema operativo. Apple describe así a XNU. Consulta <a href="questions.html">Preguntas frecuentes</a>.</dd>
+<dt id="monolithic-kernel">Núcleo monolítico (monolithic kernel)</dt>
+<dd>Un núcleo que ejecuta los sistemas de archivos, los controladores y la pila de red dentro de un solo programa privilegiado. Linux es un ejemplo.</dd>
+<dt id="memory-object">Objeto de memoria (memory object)</dt>
+<dd>Lo que respalda una región del espacio de direcciones de una tarea. Un paginador entrega sus páginas.</dd>
+<dt id="pager">Paginador (pager)</dt>
+<dd>Consulta paginador externo.</dd>
+<dt id="external-pager">Paginador externo (external pager)</dt>
+<dd>Un programa en espacio de usuario que entrega las páginas de un objeto de memoria cuando el núcleo las necesita. Consulta <a href="concepts.html">Conceptos</a>.</dd>
+<dt id="default-pager">Paginador predeterminado (default pager)</dt>
+<dd>El paginador que respalda la memoria anónima común, como las páginas de montón y de pila que no tienen un archivo detrás.</dd>
+<dt id="os-personality">Personalidad de SO (OS personality)</dt>
+<dd>Un servidor, con un pequeño resguardo en cada programa, que da a los programas la interfaz de un sistema operativo en particular. Consulta <a href="concepts.html">Conceptos</a>.</dd>
+<dt id="port">Puerto (port)</dt>
+<dd>Una cola de mensajes que el núcleo posee y protege. Los programas solo llegan a ella mediante derechos de puerto.</dd>
+<dt id="bootstrap-port">Puerto de arranque (bootstrap port)</dt>
+<dd>Un puerto que se le da a una tarea al iniciar y que lleva a un servidor que entrega otros puertos por nombre. Así encuentran los programas los servicios sin un espacio de nombres global. En macOS, el demonio de arranque cumple este papel.</dd>
+<dt id="exception-port">Puerto de excepciones (exception port)</dt>
+<dd>Un puerto que recibe un mensaje cuando un hilo falla, para que un manejador fuera del hilo que falló pueda ocuparse. El artículo de 1988 sobre el manejo de excepciones en Mach está en el <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/publications.html">archivo de publicaciones de CMU</a>.</dd>
+<dt id="sel4">seL4</dt>
+<dd>Un micronúcleo de la familia L4 con una prueba formal de corrección funcional. Mach no tiene una prueba así.</dd>
+<dt id="task">Tarea (task)</dt>
+<dd>Un contenedor de recursos: un espacio de direcciones y un conjunto de derechos de puerto. Por sí sola no ejecuta nada.</dd>
+<dt id="xnu">XNU</dt>
+<dd>El núcleo de macOS, iOS y otras plataformas de Apple. Combina un Mach modificado, código de BSD y el I/O Kit. El nombre significa «X is Not Unix».</dd>
+</dl>
+</main>
+<footer>
+<p>Una referencia independiente sobre el núcleo Mach. No la operan la Universidad Carnegie Mellon, Apple ni el proyecto GNU.</p>
+<p>La escriben y mantienen las personas que construyen <a href="https://kyberos.org/es/">KyberOS</a>, un sistema operativo con micronúcleo Mach. Las correcciones son bienvenidas: <a href="https://github.com/lshyrilser1/machkernel-site/issues">abre un issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>

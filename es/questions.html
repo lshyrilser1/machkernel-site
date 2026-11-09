@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preguntas frecuentes - Núcleo Mach</title>
+<meta name="description" content="Respuestas claras a preguntas comunes sobre Mach: velocidad, si todavía se usa, su relación con macOS y cómo se compara con L4.">
+<link rel="canonical" href="https://machkernel.org/es/questions.html">
+<link rel="alternate" hreflang="en" href="https://machkernel.org/questions.html">
+<link rel="alternate" hreflang="es-MX" href="https://machkernel.org/es/questions.html">
+<link rel="alternate" hreflang="x-default" href="https://machkernel.org/questions.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="page">
+<header>
+<a class="name" href="index.html">Mach</a>
+<nav aria-label="Páginas"><a href="index.html">Inicio</a><a href="concepts.html">Conceptos</a><a href="glossary.html">Glosario</a><a href="history.html">Historia</a><a href="implementations.html">Implementaciones</a><a href="questions.html" aria-current="page">Preguntas</a><a href="source.html">Código fuente</a><a href="reading.html">Lecturas</a><a href="../questions.html" hreflang="en" lang="en">English</a></nav>
+</header>
+<main id="main">
+<h1>Preguntas frecuentes</h1>
+<p>Respuestas breves, con las fuentes en las que se apoyan.</p>
+<h2>¿Mach es lento?</h2>
+<p>Los primeros sistemas con Mach 3.0 lo eran, y el costo se midió. Chen y Bershad compararon Mach 3.0 corriendo el servidor UNIX de CMU contra Ultrix, el sistema monolítico de DEC, en trece cargas de trabajo. Mach ejecutó bastantes más instrucciones de sistema para el mismo trabajo, y cada instrucción costó más ciclos de memoria (<a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/os-memorysys.html">resumen</a>).</p>
+<p>El paso de mensajes fue una parte grande del costo. En 1993 Jochen Liedtke mostró que un núcleo diseñado alrededor de la IPC podía ser mucho más rápido. Su núcleo L4, escrito en ensamblador i386 afinado a mano, se describe como unas 20 veces más rápido que Mach en IPC (<a href="https://en.wikipedia.org/wiki/L4_microkernel_family">familia de micronúcleos L4</a>, <a href="https://rcs.uwaterloo.ca/papers/l4.pdf">artículo de Liedtke</a>). Los propios desarrolladores de Mach también trabajaron en el problema, por ejemplo con <a href="https://www.cs.cmu.edu/afs/cs/project/mach/public/www/doc/abstracts/threadmgnt.html">continuaciones</a> e <a href="https://www.usenix.org/legacy/publications/library/proceedings/sf94/full_papers/ford.pdf">hilos migratorios</a>.</p>
+<p>Así que la respuesta depende del diseño. Un sistema que manda cada llamada de UNIX por un servidor aparte lo paga. XNU evita eso corriendo BSD dentro del núcleo.</p>
+<h3>Lo que KyberOS hace distinto</h3>
+<p>Mach X, el núcleo de <a href="https://kyberos.org/es/">KyberOS</a>, es un micronúcleo Mach puro, así que las llamadas de UNIX en KyberOS sí cruzan una frontera de mensajes. Conserva los puertos, los derechos y los mensajes de Mach tal cual y trabaja directamente sobre el costo. Cuando quien envía encuentra a un receptor que ya está esperando, el núcleo le entrega el mensaje directamente sin ponerlo en cola. Las llamadas que se pueden contestar con datos en caché están diseñadas para atenderse dentro del programa, sin ningún mensaje. Hay más mejoras de velocidad planeadas, y cada una debe medirse y descartarse si no vale la pena. KyberOS todavía no ha publicado cifras de IPC.</p>
+<h2>¿Mach está muerto?</h2>
+<p>El proyecto de CMU terminó en 1994, pero el núcleo no. XNU, que está construido sobre Mach, corre en las plataformas de Apple, y Apple reportó más de 2 mil millones de dispositivos activos a principios de 2023 (<a href="https://www.sec.gov/Archives/edgar/data/320193/000032019323000005/a8-kex991q1202312312022.htm">Formulario 8-K de Apple</a>). GNU Mach sigue siendo el micronúcleo predeterminado del GNU Hurd (<a href="https://en.wikipedia.org/wiki/GNU_Mach">GNU Mach</a>). Lo que se ha vuelto raro es el diseño puro, con todos los servicios del sistema operativo fuera del núcleo.</p>
+<h2>¿macOS es un micronúcleo?</h2>
+<p>No. La Guía de programación del núcleo de Apple dice que el entorno del núcleo en OS X incluye el núcleo Mach, BSD, el I/O Kit, sistemas de archivos y componentes de red, y que a menudo se les llama en conjunto el núcleo. La capa BSD se basa en código de FreeBSD (<a href="https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html">Descripción de la arquitectura del núcleo</a>). El README de XNU lo llama núcleo híbrido (<a href="https://github.com/apple-oss-distributions/xnu">XNU en GitHub</a>). Mach es solo una parte.</p>
+<h2>¿En qué se diferencia Mach de L4?</h2>
+<p>Responden la misma pregunta, qué tan pequeño puede ser un núcleo, con prioridades distintas. Mach tiene un conjunto rico de abstracciones: puertos con varios tipos de derechos, conjuntos de puertos, paginadores en espacio de usuario y mensajes de copia al escribir. L4 partió de la meta de hacer la IPC lo más rápida posible y agregó poco más. La familia L4 ahora incluye seL4, que tiene una prueba formal de corrección funcional (<a href="https://en.wikipedia.org/wiki/L4_microkernel_family">familia de micronúcleos L4</a>). Mach no tiene una prueba así.</p>
+<h2>¿Puedo correr Mach hoy?</h2>
+<p>Sí, de dos maneras. Todas las Mac, iPhone y iPad corren XNU, que contiene Mach, aunque lo usas a través de la capa BSD. Para un micronúcleo Mach que puedas arrancar, GNU Mach corre bajo el GNU Hurd, y Debian lo empaqueta. La página de <a href="implementations.html">implementaciones</a> enumera las demás, y <a href="source.html">la página del código fuente</a> muestra dónde leerlo.</p>
+</main>
+<footer>
+<p>Una referencia independiente sobre el núcleo Mach. No la operan la Universidad Carnegie Mellon, Apple ni el proyecto GNU.</p>
+<p>La escriben y mantienen las personas que construyen <a href="https://kyberos.org/es/">KyberOS</a>, un sistema operativo con micronúcleo Mach. Las correcciones son bienvenidas: <a href="https://github.com/lshyrilser1/machkernel-site/issues">abre un issue</a>.</p>
+</footer>
+</div>
+</body>
+</html>
